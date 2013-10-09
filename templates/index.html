@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head_tags %}
+	<link rel="stylesheet" href="/static/css/carousel.css" type="text/css" media="screen" />
+    <script src="/static/js/vendor/jcarousellite.min.js"></script>
+    <script src="/static/js/carousel.js"></script>
+{% endblock %}
+
+{% block header_block %}
+{% include "carousel/carousel_main.html" %}
+{% endblock %}
+
+{% block main %}
+
+          <div role="main">
+
+
+            <div class="stripe-regular items-carousel-wrap">
+              <div class="row">
+                <div class="column">
+                  <h1 class='discrete-h1 h2'>New Coupons</h1>
+                </div>
+              </div>
+              <div class="row collapse">
+                <div class="column">
+                  <div class="items-carousel flexslider">
+                    <ul class="rr slides">
+                        {% for coupon in new_coupons %}
+                        <li>
+                            <div class="wrapper-3 item-thumb"  data-rid="{{ coupon.ref_id }}">
+                                <div class="top">
+                                    <a href="/coupons/{{ coupon.merchant.name_slug }}/{{ coupon.merchant.id }}/">
+                                        <figure class="prodimg">
+                                            <img src="{{ coupon.get_image }}" alt="{{ coupon.description }}" style="display:normal">
+                                        </figure>
+                                    </a>
+                                    <h2 class="alt" style="max-height: 45px; overflow: hidden;"><a target="_blank" href="{{ coupon.local_path }}">{{ coupon.description }}</a></h2>
+                                </div>
+                                <div class="bottom">
+                                    <p class="value secondary">{{ coupon.short_desc }}</p>
+                                    <h6><a href="/coupons/{{ coupon.merchant.name_slug }}/">{{ coupon.merchant.name }}</a></h6>
+                                    <a href="{{ coupon.local_path }}" target="_blank" class="input button green secondary">Learn more</a>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="stripe-white big items-carousel-wrap">
+              <div class="row">
+                <div class="column">
+                  <h2>Popular Coupons</h2>
+                </div>
+              </div>
+              <div class="row collapse">
+                <div class="column">
+                  <div class="items-carousel flexslider">
+                    <ul class="rr slides">
+
+                        {% for coupon in pop_coupons %}
+                        <li>
+                            <div class="wrapper-3-alt item-thumb" data-rid="{{ coupon.ref_id }}">
+                                <div class="top">
+                                    <a href="/coupons/{{ coupon.merchant.name_slug }}/{{ coupon.merchant.id }}/">
+                                        <figure class="prodimg">
+                                            <img src="{{ coupon.get_image }}" alt="{{ coupon.description }}" style="display:normal">
+                                        </figure>
+                                    </a>
+                                    <h2 class="alt" style="max-height: 45px; overflow: hidden;"><a target="_blank" href="{{ coupon.local_path }}">{{ coupon.description }}</a></h2>
+                                </div>
+                                <div class="bottom">
+                                    <p class="value secondary">{{ coupon.short_desc }}</p>
+                                    <h6><a href="/coupons/{{ coupon.merchant.name_slug }}/">{{ coupon.merchant.name }}</a></h6>
+                                    <a target="_blank" href="{{ coupon.local_path }}/" class="input button green secondary">Learn More</a>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+{% endblock %}
+
+{% block end_of_body %}
+<script type="text/javascript">
+    try{
+        mixpanel.track("Home Page Opened", {
+            "utm_source"    : "{{ visitor.acquisition_source }}",
+            "utm_medium"    : "{{ visitor.acquisition_medium }}",
+            "utm_term"      : "{{ visitor.acquisition_term }}",
+            "utm_content"   : "{{ visitor.acquisition_content }}",
+            "utm_campaign"  : "{{ visitor.acquisition_campaign }}"
+        });
+    }catch(e){}
+</script>
+{% endblock %}
+
+
+

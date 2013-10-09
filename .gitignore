@@ -1,0 +1,15 @@
+static/img/local/*
+tmp/*
+*.py[co]
+*.log
+Categories_Content_*
+Deal_Types_Content_*
+Deals_Content_*
+Merchants_Content_*
+data
+sitemap/*.xml.gz
+sitemap/*.xml
+
+.pydevproject
+.DS_Store
+.idea/*
